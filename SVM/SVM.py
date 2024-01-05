@@ -1,5 +1,9 @@
 import numpy as np
-
+'''
+ Best explaination of loss function in SVM - 
+ https://www.youtube.com/watch?v=utqrvIFAE1k&list=PLKnIA16_RmvbOIFee-ra7U6jR2oIbCZBL&index=5
+ + 100 page ML book + https://www.youtube.com/watch?v=T9UcK-TxQGw&t=223s
+'''
 class SVM:
     def __init__(self, lr = 0.001, reg_lambda = 0.01, epochs = 100):
         self.lr = lr
@@ -22,8 +26,10 @@ class SVM:
         # db = 0 if y(w*x - b) > 1 else y
         for _ in range(self.epochs):
             for idx, x in enumerate(X):
+                # condition checks if the point is correctly classified or not
                 condition = (y_[idx] * (np.dot(self.weights, x) - self.bias)) 
                 if condition > 1:
+                    # point is correctly classified
                     self.weights -= self.lr * 2 * self.reg_lambda * self.weights
                 else:
                     self.weights -= self.lr * (2 * self.reg_lambda * self.weights - np.dot(y_[idx], x))
